@@ -60,6 +60,7 @@ def zip_directory(input_dir, output_filename):
     shutil.make_archive(output_filename, 'zip', input_dir)
     print(f"Directory {input_dir} zipped into {output_filename}.zip")
 
+
 cwd = os.getcwd()
 cwd = os.path.join(cwd, 'schilderijen')
 
