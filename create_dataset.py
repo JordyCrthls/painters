@@ -32,7 +32,7 @@ def download_image(path, save_path):
 def get_url_of_image(row):
     tds = row.find_all('td')
 
-        # If there's a second td, get the 'a' tag inside it
+    # If there's a second td, get the 'a' tag inside it
     if len(tds) > 1:
         a_tag = tds[1].find('a')
 

@@ -6,7 +6,7 @@ import shutil
 def convert_image_to_jpg(img_path):
     image = Image.open(img_path)
 
-    if image.format != 'JPEG':
+    if image.format != 'jpg':
         # Split the file name and the extension
         file_root, _ = os.path.splitext(img_path)
 
@@ -18,7 +18,7 @@ def convert_image_to_jpg(img_path):
         print(f'Image saved as {jpg_image_path}')
         return jpg_image_path
     else:
-        print('Image is already JPEG format')
+        print('Image is already jpg format')
         return img_path
 
 
@@ -35,10 +35,15 @@ def is_image_corrupt(image_path):
 def rename_image(current_img_path, new_img_name):
     dir_name, old_file_name = os.path.split(current_img_path)
     old_name, file_extension = os.path.splitext(old_file_name)
-    new_img_path = os.path.join(dir_name, str(new_img_name) + file_extension)
+    if file_extension == '.jpeg':
+        file_extension = '.jpg'
+    new_img_path = os.path.join(dir_name, str(new_img_name) + file_extension.lower())
 
     if os.path.exists(current_img_path):
-        os.rename(current_img_path, new_img_path)
+        try:
+            os.rename(current_img_path, new_img_path)
+        except IOError as e:
+            print('Bad file:', e, current_img_path)
         print(f"Image renamed to: {new_img_path}")
     else:
         print(f"Image at {current_img_path} does not exist.")
